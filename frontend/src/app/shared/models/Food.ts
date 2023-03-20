@@ -3,9 +3,9 @@ export class Food{
   name!:string;
   price!:number;
   tags?:string[];
-  favourite!:boolean;
+  favorite!:boolean;
   stars!:number;
-  imageURL!:string;
+  imageUrl!:string;
   origins!:string[];
   cookTime!:string;
 }
