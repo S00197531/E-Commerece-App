@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/User';
@@ -8,11 +8,11 @@ import { User } from 'src/app/shared/models/User';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
 
   cartQuantity=0;
   user!:User;
-  constructor(cartService:CartService,userService:UserService){
+  constructor(cartService:CartService,private userService:UserService){
     cartService.getCarObservable().subscribe((newCart) => {
       this.cartQuantity = newCart.totalCount;
     })
@@ -21,4 +21,13 @@ export class HeaderComponent {
       this.user = newUser;
     })
   }
+
+  ngOnInit(): void {
+
+  }
+
+  logout(){
+    this.userService.logout();
+  }
+
 }
