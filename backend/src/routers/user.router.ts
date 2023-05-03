@@ -3,6 +3,7 @@ import { sample_foods, sample_users } from "../data";
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler'
 import { UserModel } from "../models/user.model";
+import { HTTP_BAD_REQUEST } from "../constants/http_status";
 
 const router = Router()
 
@@ -26,8 +27,20 @@ router.post("/login", asyncHandler(
             if(user){
                 res.send(generateTokenResponse(user))
             } else {
-                res.status(400).send("username or password is invalid")
+                res.status(HTTP_BAD_REQUEST).send("username or password is invalid")
             }
+    }
+))
+
+router.post('/register', asyncHandler(
+    async (req, res) => {
+        const {name, email, password, address} = req.body;
+        const user = await UserModel.findOne({email});
+        if(user){
+            res.status(HTTP_BAD_REQUEST).send('User already exists, please login!');
+            return;
+        }
+        
     }
 ))
 
