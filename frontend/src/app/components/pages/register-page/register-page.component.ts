@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_validator';
 
 @Component({
   selector: 'app-register-page',
@@ -32,5 +33,5 @@ export class RegisterPageComponent implements OnInit{
       validators: PasswordsMatchValidator('password', 'confirmPassword')
     })
     
-  }
+  }}
 }
