@@ -30,4 +30,8 @@ export class MapComponent implements OnInit{
 
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
   }
+
+  findMyLocation(){
+    
+  }
 }
