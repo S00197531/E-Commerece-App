@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LatLngTuple, Map, tileLayer, map} from 'leaflet';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'map',
@@ -14,7 +15,7 @@ export class MapComponent implements OnInit{
   mapRef!: ElementRef
 
   map!:Map;
-  constructor(){}
+  constructor(private locationService: LocationService){}
 
   ngOnInit(): void {
     this.initializeMap();
@@ -32,6 +33,10 @@ export class MapComponent implements OnInit{
   }
 
   findMyLocation(){
-    
+    this.locationService.getCurrentLocation().subscribe({
+      next: (latlng) => {
+        console.log(latlng)
+      }
+    })
   }
 }
