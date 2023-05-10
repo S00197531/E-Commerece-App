@@ -53,7 +53,7 @@ export class UserService {
             'Register Failed')
         }
       })
-    )
+    );
   }
 
   logout(){
