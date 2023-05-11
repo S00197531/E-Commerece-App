@@ -29,6 +29,7 @@ import { OrderItemsListComponent } from './components/partials/order-items-list/
 import { MapComponent } from './components/partials/map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoadingComponent,
     CheckoutPageComponent,
     OrderItemsListComponent,
-    MapComponent
+    MapComponent,
+    PaymentPageComponent
   ],
   imports: [
     BrowserModule,
