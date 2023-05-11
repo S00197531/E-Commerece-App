@@ -14,6 +14,7 @@ const USER_KEY = 'User';
 export class UserService {
   private userSubject = new BehaviorSubject<User>(this.getUserFromLocalStorage());
   public userObservable:Observable<User>;
+  private _loggedInUser?: User;
 
   constructor(private http:HttpClient, private toastrService:ToastrService) { 
     this.userObservable = this.userSubject.asObservable();
@@ -21,6 +22,10 @@ export class UserService {
 
   public get currentUser():User{
     return this.userSubject.value;
+  }
+
+  loggedIn() {
+    return !!localStorage.getItem(USER_KEY)
   }
 
   login(userLogin:IUserLogin):Observable<User>{
@@ -59,6 +64,8 @@ export class UserService {
       })
     );
   }
+  
+  
 
   logout(){
     this.userSubject.next(new User());
@@ -75,4 +82,7 @@ export class UserService {
     if(userJson) return JSON.parse(userJson) as User;
     return new User();
   }
+
+  
+  
 }

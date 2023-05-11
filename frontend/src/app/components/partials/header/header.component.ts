@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit{
 
   cartQuantity=0;
   user!:User;
-  constructor(cartService:CartService,private userService:UserService){
+  constructor(cartService:CartService,public userService:UserService){
     cartService.getCarObservable().subscribe((newCart) => {
       this.cartQuantity = newCart.totalCount;
     })
