@@ -35,8 +35,18 @@ readonly =false;
   constructor(private locationService: LocationService){}
 
   ngOnChanges(): void {
+    if(!this.order) return;
     this.initializeMap();
+
+    if(this.readonly && this.addressLatLng){
+      this.showLocationOnReadonlyMode();
+    }
     
+  }
+  showLocationOnReadonlyMode() {
+    const m = this.map;
+    this.setMarker(this.addressLatLng);
+    m.setView(this.addressLatLng, this.MARKER_ZOOM_LEVEL);
   }
 
   initializeMap(){
@@ -79,6 +89,9 @@ readonly =false;
   }
 
   set addressLatLng(latlng: LatLng){
+
+    if(!latlng.lat.toFixed) return;
+
     latlng.lat = parseFloat(latlng.lat.toFixed(8));
     latlng.lng = parseFloat(latlng.lng.toFixed(8));
     this.order.addressLatLng = latlng;
