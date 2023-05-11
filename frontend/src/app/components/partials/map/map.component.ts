@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { LeafletDirective } from '@asymmetrik/ngx-leaflet';
 import { LatLngExpression, LeafletMouseEvent } from 'leaflet';
 import { LatLngTuple, Map, tileLayer, map, icon, Marker, LatLng, marker} from 'leaflet';
@@ -10,10 +10,12 @@ import { Order } from 'src/app/shared/models/order';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements OnChanges{
 
 @Input()
 order!:Order;
+@Input()
+readonly =false;
 
   private readonly MARKER_ZOOM_LEVEL = 16;
   private readonly MARKER_ICON = icon({
@@ -32,7 +34,7 @@ order!:Order;
 
   constructor(private locationService: LocationService){}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.initializeMap();
     
   }
@@ -81,5 +83,9 @@ order!:Order;
     latlng.lng = parseFloat(latlng.lng.toFixed(8));
     this.order.addressLatLng = latlng;
     console.log(this.order.addressLatLng)
+  }
+
+  get addressLatLng(){
+    return this.order.addressLatLng!;
   }
 }
