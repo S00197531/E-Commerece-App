@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { LatLngExpression } from 'leaflet';
+import { LeafletDirective } from '@asymmetrik/ngx-leaflet';
+import { LatLngExpression, LeafletMouseEvent } from 'leaflet';
 import { LatLngTuple, Map, tileLayer, map, icon, Marker, LatLng, marker} from 'leaflet';
 import { LocationService } from 'src/app/services/location.service';
 
@@ -40,6 +41,10 @@ export class MapComponent implements OnInit{
         }).setView(this.DEFAULT_LATLNG, 1);
 
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(this.map);
+
+    this.map.on('click', (e:LeafletMouseEvent) => {
+      this.setMarker(e.latlng);
+    })
   }
 
   findMyLocation(){
