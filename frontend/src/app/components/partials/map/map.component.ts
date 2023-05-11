@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { LeafletDirective } from '@asymmetrik/ngx-leaflet';
 import { LatLngExpression, LeafletMouseEvent } from 'leaflet';
 import { LatLngTuple, Map, tileLayer, map, icon, Marker, LatLng, marker} from 'leaflet';
 import { LocationService } from 'src/app/services/location.service';
+import { Order } from 'src/app/shared/models/order';
 
 @Component({
   selector: 'map',
@@ -10,6 +11,9 @@ import { LocationService } from 'src/app/services/location.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit{
+
+@Input()
+order!:Order;
 
   private readonly MARKER_ZOOM_LEVEL = 16;
   private readonly MARKER_ICON = icon({
@@ -57,6 +61,7 @@ export class MapComponent implements OnInit{
   }
 
   setMarker(latlng:LatLngExpression){
+    this.addressLatLng = latlng as LatLng;
     if(this.currentMarker){
       this.currentMarker.setLatLng(latlng);
       return;
@@ -65,5 +70,16 @@ export class MapComponent implements OnInit{
       draggable: true,
       icon: this.MARKER_ICON
     }).addTo(this.map);
+
+    this.currentMarker.on('dragend', () => {
+      this.addressLatLng = this.currentMarker.getLatLng();
+    })
+  }
+
+  set addressLatLng(latlng: LatLng){
+    latlng.lat = parseFloat(latlng.lat.toFixed(8));
+    latlng.lng = parseFloat(latlng.lng.toFixed(8));
+    this.order.addressLatLng = latlng;
+    console.log(this.order.addressLatLng)
   }
 }
