@@ -28,6 +28,7 @@ import { CheckoutPageComponent } from './components/pages/checkout-page/checkout
 import { OrderItemsListComponent } from './components/partials/order-items-list/order-items-list.component';
 import { MapComponent } from './components/partials/map/map.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 @NgModule({
@@ -68,7 +69,9 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true},
     {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi:true}
+
   ],
   bootstrap: [AppComponent]
 })
