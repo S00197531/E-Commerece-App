@@ -20,18 +20,20 @@ router.get("/seed", asyncHandler(
     }
  ))
 
-router.post("/login", asyncHandler(
-    async (req,res) => {
-        const {email, password} = req.body;
-        const user = await UserModel.findOne({email, password})
+ router.post("/login", asyncHandler(
+    async (req, res) => {
+      const {email, password} = req.body;
+      const user = await UserModel.findOne({email});
     
-            if(user){
-                res.send(generateTokenResponse(user))
-            } else {
-                res.status(HTTP_BAD_REQUEST).send("username or password is invalid")
-            }
+       if(user && (await bcrypt.compare(password,user.password))) {
+        res.send(generateTokenResponse(user));
+       }
+       else{
+         res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
+       }
+    
     }
-))
+  ))
 
 router.post('/register', asyncHandler(
     async (req, res) => {
@@ -58,9 +60,11 @@ router.post('/register', asyncHandler(
 const generateTokenResponse = (user:any) => {
     const token = jwt.sign({
         id:user.id, email:user.email, isAdmin:user.isAdmin
-    }, "12345", {
+    }, process.env.JWT_SECRET!, {
         expiresIn: "30d"
     });
+
+    
 
     user.token = token;
     return user;
