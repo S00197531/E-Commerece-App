@@ -57,6 +57,15 @@ router.post('/register', asyncHandler(
     }
 ))
 
+router.get('/', async (req, res) => {
+    try {
+      const users = await UserModel.find();
+      res.json(users);
+    } catch (err:any) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
 const generateTokenResponse = (user:any) => {
     const token = jwt.sign({
         id:user.id, email:user.email, isAdmin:user.isAdmin

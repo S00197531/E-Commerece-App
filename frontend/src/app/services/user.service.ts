@@ -3,11 +3,12 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../shared/models/User';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { HttpClient } from '@angular/common/http';
-import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
+import { USER_LOGIN_URL, USER_REGISTER_URL, USER_URL } from '../shared/constants/urls';
 import { ToastrService } from 'ngx-toastr';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
 
 const USER_KEY = 'User';
+const apiUrl = '/api/users';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,6 +16,9 @@ export class UserService {
   private userSubject = new BehaviorSubject<User>(this.getUserFromLocalStorage());
   public userObservable:Observable<User>;
   private _loggedInUser?: User;
+  user!:User;
+  
+
 
   constructor(private http:HttpClient, private toastrService:ToastrService) { 
     this.userObservable = this.userSubject.asObservable();
@@ -26,6 +30,10 @@ export class UserService {
 
   loggedIn() {
     return !!localStorage.getItem(USER_KEY)
+  }
+
+  getUsers() {
+    return this.http.get(USER_URL);
   }
 
   login(userLogin:IUserLogin):Observable<User>{
@@ -64,6 +72,7 @@ export class UserService {
       })
     );
   }
+  
   
   
 
