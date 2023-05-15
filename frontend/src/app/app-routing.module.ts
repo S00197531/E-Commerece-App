@@ -10,6 +10,7 @@ import { AuthGuard } from './auth/guards/auth.guard';
 import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 import { AdminDashboardComponent } from './components/pages/admin-dashboard/admin-dashboard.component';
+import { RoleGuard } from './auth/guards/role-guard.guard';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path: 'checkout', component:CheckoutPageComponent, canActivate:[AuthGuard]},
   {path: 'payment', component:PaymentPageComponent, canActivate:[AuthGuard]},
   {path: 'track/:orderId', component:OrderTrackPageComponent, canActivate:[AuthGuard]},
-  {path: 'admin', component:AdminDashboardComponent},
+  {path: 'admin', component:AdminDashboardComponent, canActivate:[RoleGuard]},
 
 
 

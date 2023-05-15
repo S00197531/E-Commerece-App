@@ -28,6 +28,7 @@ export class UserService {
     return this.userSubject.value;
   }
 
+
   loggedIn() {
     return !!localStorage.getItem(USER_KEY)
   }
