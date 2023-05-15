@@ -31,6 +31,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 import { PaypalButtonComponent } from './components/partials/paypal-button/paypal-button.component';
+import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { PaypalButtonComponent } from './components/partials/paypal-button/paypa
     OrderItemsListComponent,
     MapComponent,
     PaymentPageComponent,
-    PaypalButtonComponent
+    PaypalButtonComponent,
+    OrderTrackPageComponent
   ],
   imports: [
     BrowserModule,
