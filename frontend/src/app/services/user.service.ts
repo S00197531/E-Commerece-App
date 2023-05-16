@@ -95,6 +95,10 @@ export class UserService {
     );
   }
   
+  deleteUser(userId: string): Observable<void> {
+    const url = `${USER_URL}/${userId}`;
+    return this.http.delete<void>(url);
+  }
   
   
 

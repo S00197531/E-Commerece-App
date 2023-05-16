@@ -68,6 +68,25 @@ router.get('/', async (req, res) => {
   });
 
   router.put('/:id', userController.updateUser);
+
+  router.delete('/:id', async (req, res) => {
+    const userId = req.params.id;
+  
+    try {
+      // Delete the user from the database
+      const result = await UserModel.deleteOne({ _id: userId });
+  
+      if (result.deletedCount === 0) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      return res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting user:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
   
  
 

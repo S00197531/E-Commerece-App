@@ -19,6 +19,24 @@ export class AdminDashboardComponent implements OnInit{
     
   }
 
+  fetchUsers(): void {
+    this.userService.getUsers().subscribe((users: any) => {
+      this.users = users;
+    });
+  }
+
+  deleteUser(userId: string): void {
+    this.userService.deleteUser(userId).subscribe(
+      () => {
+        // Remove the deleted user from the users array
+        this.users = this.users.filter(user => user.id !== userId);
+        console.log('User deleted successfully.');
+      },
+      error => {
+        console.error('Error deleting user:', error);
+      }
+    );
+  }
  
 
 
