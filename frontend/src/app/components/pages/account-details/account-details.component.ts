@@ -16,6 +16,11 @@ export class AccountDetailsComponent implements OnInit{
 
   ngOnInit() {
 
+    this.userService.userObservable.subscribe((user) => {
+      this.user = user;
+      // Handle the updated user information
+    });
+
     this.user = this.userService.currentUser;
     
   }
@@ -36,5 +41,7 @@ export class AccountDetailsComponent implements OnInit{
       this.isEditMode = true;
     }
   }
+
+  
 
 }
