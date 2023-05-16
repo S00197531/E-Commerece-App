@@ -28,6 +28,27 @@ export class UserService {
     return this.userSubject.value;
   }
 
+  public updateUser(user: User):Observable<User> {
+    return this.http.put<User>(`${USER_URL}/${user.id}`, user).pipe(
+      tap({
+        next: (updatedUser) => {
+          this.setUserToLocalStorage(updatedUser);
+          this.userSubject.next(updatedUser);
+          this.toastrService.success(
+            `Your account details have been updated successfully!`,
+            'Update Successful'
+          )
+        },
+        error: (errorResponse) => {
+          this.toastrService.error(
+            'There was an error while updating your account details. Please try again later.',
+            'Update Failed'
+          );
+        }
+      })
+    );
+  }
+
 
   loggedIn() {
     return !!localStorage.getItem(USER_KEY)

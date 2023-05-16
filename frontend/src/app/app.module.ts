@@ -33,7 +33,8 @@ import { PaymentPageComponent } from './components/pages/payment-page/payment-pa
 import { PaypalButtonComponent } from './components/partials/paypal-button/paypal-button.component';
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 import { AdminDashboardComponent } from './components/pages/admin-dashboard/admin-dashboard.component';
-
+import { AccountDetailsComponent } from './components/pages/account-details/account-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -59,10 +60,12 @@ import { AdminDashboardComponent } from './components/pages/admin-dashboard/admi
     PaymentPageComponent,
     PaypalButtonComponent,
     OrderTrackPageComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    AccountDetailsComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     RatingModule,

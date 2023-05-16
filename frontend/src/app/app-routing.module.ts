@@ -11,6 +11,7 @@ import { PaymentPageComponent } from './components/pages/payment-page/payment-pa
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 import { AdminDashboardComponent } from './components/pages/admin-dashboard/admin-dashboard.component';
 import { RoleGuard } from './auth/guards/role-guard.guard';
+import { AccountDetailsComponent } from './components/pages/account-details/account-details.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'cart-page', component:CartPageComponent},
   {path: 'login', component:LoginPageComponent},
   {path: 'register', component:RegisterPageComponent},
+  {path: 'account', component:AccountDetailsComponent},
   {path: 'checkout', component:CheckoutPageComponent, canActivate:[AuthGuard]},
   {path: 'payment', component:PaymentPageComponent, canActivate:[AuthGuard]},
   {path: 'track/:orderId', component:OrderTrackPageComponent, canActivate:[AuthGuard]},

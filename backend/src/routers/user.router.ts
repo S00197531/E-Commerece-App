@@ -6,6 +6,7 @@ import { User, UserModel } from "../models/user.model";
 import { HTTP_BAD_REQUEST } from "../constants/http_status";
 import bcrypt from 'bcryptjs';
 
+const userController = require('../controllers/userController');
 const router = Router()
 
 router.get("/seed", asyncHandler(
@@ -66,6 +67,7 @@ router.get('/', async (req, res) => {
     }
   });
 
+  router.put('/:id', userController.updateUser);
   
  
 

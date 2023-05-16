@@ -1,0 +1,25 @@
+.profile-field {
+    margin-bottom: 10px;
+  }
+
+  .container {
+    zoom: 2;
+  }
+  
+  .profile-field label {
+    font-weight: bold;
+  }
+  
+  .profile-field input {
+    border: none;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 4px;
+    width: 300px;
+    box-sizing: border-box;
+  }
+  
+  .profile-field input[readonly] {
+    background-color: #ddd;
+  }
+  
