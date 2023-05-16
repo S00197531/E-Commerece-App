@@ -73,7 +73,6 @@ router.get('/', async (req, res) => {
     const userId = req.params.id;
   
     try {
-      // Delete the user from the database
       const result = await UserModel.deleteOne({ _id: userId });
   
       if (result.deletedCount === 0) {

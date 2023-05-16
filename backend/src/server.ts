@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 process.env.MONGO_URI
-
+import path from 'path'
 import express from "express";
 import cors from "cors"
 import { sample_foods, sample_tags, sample_users } from "./data";
@@ -24,8 +24,13 @@ app.use("/api/foods", foodRouter)
 app.use("/api/users", userRouter)
 app.use("/api/orders", orderRouter)
 
+app.use(express.static('public'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname , 'public', 'index.html'))
+})
 
-const port = 5000;
+
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log("Website served on http:localhost:" + port);
 })
