@@ -17,8 +17,9 @@ app.use(express.json());
 
 app.use(cors({
     credentials:true,
-    origin:["http://localhost:4200"],
-    allowedHeaders: 'access_token'
+    origin:["https://eat-more.herokuapp.com"],
+    allowedHeaders: ['access_token'],
+    
 }));
 
 // app.use((req, res, next) => {
