@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(cors({
     credentials:true,
-    origin:["http://localhost:5000"]
+    origin:["https://eat-more.herokuapp.com/"]
 }));
 
 app.use("/api/foods", foodRouter)
