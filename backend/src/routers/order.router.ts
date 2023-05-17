@@ -4,10 +4,14 @@ import { OrderModel } from "../models/order.model";
 import { OrderStatus } from "../constants/order_status";
 import auth from '../middlewares/auth.mid'
 import asyncHandler from 'express-async-handler'
+import cors from 'cors';
+
 
 const router= Router();
 router.use(auth)
 
+
+router.options('/create', cors())
 router.post('/create',
 asyncHandler(async (req:any, res:any) => {
     const requestOrder = req.body;
