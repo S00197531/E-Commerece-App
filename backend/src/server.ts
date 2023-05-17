@@ -20,7 +20,6 @@ app.use(cors({
     origin:["https://eat-more.herokuapp.com"],
     allowedHeaders: ['access_token'],
     methods: ['GET, POST, PUT, DELETE, OPTIONS']
-    
 }));
 
 // app.use((req, res, next) => {
